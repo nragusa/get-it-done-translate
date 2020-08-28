@@ -1,0 +1,40 @@
+service: get-it-done-translate
+
+provider:
+  # Defaults
+  name: aws
+  runtime: python3.8
+  stage: dev
+  region: us-west-2
+  tracing:
+    lambda: true
+  apiKeys:
+    - devAPIKey
+
+  # Role for our function(s)
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "translate:TranslateText"
+      Resource: "*"
+
+functions:
+  # Simple translate Lambda fronted by API Gateway
+  translate:
+    handler: translate.main
+    events:
+      - http:
+          path: /translate
+          method: post
+          private: true
+# you can add CloudFormation resource templates here
+#resources:
+#  Resources:
+#    NewResource:
+#      Type: AWS::S3::Bucket
+#      Properties:
+#        BucketName: my-new-bucket
+#  Outputs:
+#     NewOutput:
+#       Description: "Description for the output"
+#       Value: "Some output value"
