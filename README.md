@@ -64,3 +64,11 @@ Take note of the API key and the endpoint. In a tool like [Postman](https://www.
 
 - Specify a header of `x-api-key` with the value of the `devAPIKey` from above:
   ![Postman Header](./images/header.png)
+
+### Troubleshooting
+
+When troubleshooting the API, it might be helpful to watch the output that is sent to CloudWatch Logs. You can easily do this directly from the CLI:
+
+```bash
+serverless logs -f translate -t
+```

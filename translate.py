@@ -13,14 +13,14 @@ def main(event, context):
     translate_client = boto3.client('translate')
     status = 200
     body = json.loads(event['body'])
-    print('Hello World!')
     try:
         if body is not None and 'text' in body:
             message = body['text']
             if body.get('lang', '') in SUPPORTED_LANGUAGES:
                 language = body['lang']
             else:
-                language = 'es'
+                language = 'en'
+            # Assumes the source language is ES
             translate_response = translate_client.translate_text(
                 Text=message,
                 SourceLanguageCode='es',
